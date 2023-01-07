@@ -8,7 +8,7 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="flex justify-end m-2 p-2">
-                    <Link href="/projects/create" class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 text-white rounded-md">New Project</Link>
+                    <Link :href="route('projects.create')" class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 text-white rounded-md">New Project</Link>
                 </div>
                 <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -30,9 +30,8 @@
                                 <td class="py-4 px-6">{{ project.project_url }}</td>
                                 <td class="py-4 px-6"><img :src="project.image" class="w-10 h-10" /></td>
                                 <td class="py-4 px-6">
-                                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                    || 
-                                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</a>
+                                    <Link :href="route('projects.edit', project.id)" class="font-medium text-blue-500 dark:text-blue-500 hover:text-blue-700 mr-5">Edit</Link>
+                                    <Link :href="route('projects.destroy', project.id)" method="delete" as="button" type="button" class="font-medium text-blue-500 dark:text-red-500 hover:text-red-700 ml-5">Delete</Link>
                                 </td>
                             </tr>
                         </tbody>
@@ -46,7 +45,6 @@
 <script setup>
     import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
     import { Head, Link } from '@inertiajs/inertia-vue3';
-
     defineProps({
         projects: Object,
     });

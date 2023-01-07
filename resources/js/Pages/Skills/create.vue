@@ -6,7 +6,7 @@
         </template>
 
         <div class="py-12">
-            <div class="max-w-md mx-auto sm:px-6 lg:px-8 bg-white">
+            <div class="max-w-2xl max-w-md mx-auto sm:px-6 lg:px-8 bg-white">
                 <form class="p-4" @submit.prevent="submit">
                     <div>
                         <InputLabel for="name" value="Name" />
@@ -37,12 +37,10 @@
     import InputLabel from '@/Components/InputLabel.vue';
     import PrimaryButton from '@/Components/PrimaryButton.vue';
     import TextInput from '@/Components/TextInput.vue';
-
     const form = useForm({
         name: null,
         image: null,
     });
-
     const submit = () => {
         form.post(route('skills.store'));
     };

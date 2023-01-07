@@ -23,7 +23,7 @@ class Skill extends Model
 
     public static function getImageUrl($request){
         self::$image = $request->file('image');
-        self::$imageName = self::$image->getClientOriginalName();
+        self::$imageName = self::$image->getClientOriginalName().time().'.'.self::$image->getClientOriginalExtension();
         self::$directory = 'skill-images/';
         self::$image->move(self::$directory, self::$imageName);
         return self::$directory.self::$imageName;

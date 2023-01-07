@@ -1,0 +1,36 @@
+Hero section
+
+title: I Build, Design & Develop
+Web Application.
+
+Description:
+I'm a full-stack web developer with 3+ years of experience. I have a passion for building web applications and I'm always looking for new challenges.
+
+
+
+
+
+About Section 
+
+title: I'm a full-stack web developer 
+
+
+description: I am an innovative thinker and an initiative taker with exceptional, logical, and analytical skills possess 1+ years of experience as a Web Developer.
+
+I have a strong understanding of the web development process (design, development, and deployment) and an ability to work with a team.
+
+I am a quick learner and a fast worker. I am always ready to learn new technologies and improve my skills.
+
+I am a self-motivated and hardworking person. I am always ready to take up new challenges and responsibilities.
+
+I am a team player and a good communicator. I am always ready to help my team members and work together to achieve their goals.
+
+I am a problem solver and a good listener. I am always ready to listen to my team members and solve their problems.
+
+I am a good time manager and a good planner. I am always ready to plan my work and manage my time to complete my work on time.
+
+I am a good decision-maker and a good leader. I am always ready to make decisions and lead my team to achieve goals.
+
+I am a good researcher and a good writer. I am always ready to research and write about new technologies and share my knowledge with others.
+
+I love to work with modern technologies and am never afraid of learning new ones. 

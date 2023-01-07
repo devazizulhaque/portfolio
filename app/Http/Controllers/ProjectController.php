@@ -42,18 +42,7 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         Project::createProject($request);
-        return Redirect::route('projects.index');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        return Redirect::route('projects.index')->with('message', 'Project create successfully...');
     }
 
     /**
@@ -62,9 +51,11 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Project $project)
     {
-        //
+        $skills = Skill::all();
+        // $projects = ProjectResource::collection(Project::with('skill')->get());
+        return Inertia::render('Projects/Edit', compact('project', 'skills'));
     }
 
     /**
@@ -74,9 +65,10 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Project $project)
     {
-        //
+        Project::updateProject($request, $project);
+        return Redirect::route('projects.index')->with('message', 'Project update successfully...');
     }
 
     /**
@@ -85,8 +77,9 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Project $project)
     {
-        //
+        Project::destroy($project);
+        return Redirect::back()->with('message', 'Project delete successfully...');
     }
 }

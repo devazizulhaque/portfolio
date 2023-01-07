@@ -38,6 +38,15 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink :href="route('projects.index')" :active="route().current('projects.index')">
                                     Projects
                                 </NavLink>
+                                <NavLink :href="route('heros.index')" :active="route().current('heros.index')">
+                                    Hero
+                                </NavLink>
+                                <NavLink :href="route('abouts.index')" :active="route().current('abouts.index')">
+                                    About
+                                </NavLink>
+                                <NavLink :href="route('services.index')" :active="route().current('services.index')">
+                                    Service
+                                </NavLink>
                             </div>
                         </div>
 
@@ -148,6 +157,12 @@ const showingNavigationDropdown = ref(false);
                     <slot name="header" />
                 </div>
             </header>
+
+            <div v-if="$page.props.flash.message" class="p-4 mb-4 text-sm text-blue-700 bg-blue-100 dark:bg-blue-400 dark:text-blue-800" role="alert">
+                <div class="max-w-6xl mx-auto">
+                    {{ $page.props.flash.message }}
+                </div>
+            </div>
 
             <!-- Page Content -->
             <main>

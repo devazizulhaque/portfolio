@@ -41,7 +41,7 @@ class SkillController extends Controller
     public function store(Request $request)
     {
         Skill::createSkill($request);
-        return Redirect::route('skills.index');
+        return Redirect::route('skills.index')->with('message', 'Skill create successfully...');
     }
 
     /**
@@ -63,7 +63,8 @@ class SkillController extends Controller
      */
     public function edit(Skill $skill)
     {
-        return Inertia::render('Skills/Edit', compact('skill'));
+        $skills = SkillResource::collection(Skill::all());
+        return Inertia::render('Skills/Edit', compact('skills', 'skill'));
     }
 
     /**
@@ -76,7 +77,7 @@ class SkillController extends Controller
     public function update(Request $request, Skill $skill)
     {
         Skill::updateSkill($request, $skill);
-        return Redirect::route('skills.index');
+        return Redirect::route('skills.index')->with('message', 'Skill update successfully...');
     }
 
     /**
@@ -88,6 +89,6 @@ class SkillController extends Controller
     public function destroy(Skill $skill)
     {
         Skill::destroy($skill);
-        return Redirect::back();
+        return Redirect::back()->with('message', 'Skill delete successfully...');
     }
 }

@@ -25,7 +25,7 @@ class Project extends Model
 
     public static function getImageUrl($request){
         self::$image = $request->file('image');
-        self::$imageName = self::$image->getClientOriginalName();
+        self::$imageName = self::$image->getClientOriginalName().'-'.time().'.'.self::$image->getClientOriginalExtension();
         self::$directory = 'project-images/';
         self::$image->move(self::$directory, self::$imageName);
         return self::$directory.self::$imageName;
@@ -44,5 +44,34 @@ class Project extends Model
         self::$project->project_url = $request->project_url;
         self::$project->image = self::getImageUrl($request);
         self::$project->save();
+    }
+
+    public static function updateProject($request, $project){
+        self::$project = Project::find($project->id);
+        if($request->file('image')){
+            if (file_exists(self::$project->image)) {
+                unlink(self::$project->image);
+            }
+            self::$project->image = self::getImageUrl($request);
+        }
+        else{
+            self::$project->image = $project->image;
+        }
+        $request->validate([
+            'name' => ['required', 'max:255'],
+            'skill_id' => ['required', 'integer'],
+        ]);
+        self::$project->skill_id = $request->skill_id;
+        self::$project->name = $request->name;
+        self::$project->project_url = $request->project_url;
+        self::$project->save();
+    }
+
+    public static function destroy($project){
+        self::$project = Project::find($project->id);
+        if (file_exists($project->image)) {
+            unlink($project->image);
+        }
+        $project->delete();
     }
 }

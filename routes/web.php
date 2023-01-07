@@ -1,11 +1,15 @@
 <?php
 
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\HeroController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\WelcomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,14 +22,7 @@ use App\Http\Controllers\ProjectController;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
 Route::middleware(['auth', 'verified'])->group(function(){
     Route::get('/dashboard', function () {
@@ -34,6 +31,9 @@ Route::middleware(['auth', 'verified'])->group(function(){
 
     Route::resource('/skills', SkillController::class);
     Route::resource('/projects', ProjectController::class);
+    Route::resource('/heros', HeroController::class);
+    Route::resource('/abouts', AboutController::class);
+    Route::resource('/services', ServiceController::class);
 });
 
 Route::middleware('auth')->group(function () {

@@ -6,7 +6,7 @@
         </template>
 
         <div class="py-12">
-            <div class="max-w-md mx-auto sm:px-6 lg:px-8 bg-white">
+            <div class="max-w-2xl max-w-md mx-auto sm:px-6 lg:px-8 bg-white">
                 <form class="p-4" @submit.prevent="submit">
 
                     <div>
@@ -14,11 +14,12 @@
                         <select v-model="form.skill_id" name="skill_id" id="skill_id" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rouded-md rounded">
                             <option v-for="skill in skills" :key="skill.id" :value="skill.id">{{ skill.name }}</option>
                         </select>
+                        <InputError class="mt-2" :message="form.errors.skill_id" />
                     </div>
 
                     <div>
                         <InputLabel for="name" value="Name" />
-                        <TextInput id="name" type="text" class="mt-1 block w-full" v-model="form.name" required autofocus autocomplete="name" />
+                        <TextInput id="name" type="text" class="mt-1 block w-full" v-model="form.name" autofocus autocomplete="name" />
                         <InputError class="mt-2" :message="form.errors.name" />
                     </div>
 
@@ -51,18 +52,15 @@
     import InputLabel from '@/Components/InputLabel.vue';
     import PrimaryButton from '@/Components/PrimaryButton.vue';
     import TextInput from '@/Components/TextInput.vue';
-
     defineProps({
         skills: Array,
     })
-
     const form = useForm({
         name: '',
         image: null,
         skill_id: '',
         project_url: '',
     });
-
     const submit = () => {
         form.post(route('projects.store'));
     };
