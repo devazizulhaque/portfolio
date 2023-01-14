@@ -57,6 +57,7 @@ class Skill extends Model
             'name' => ['required', 'max:255'],
         ]);
         self::$skill->name = $request->name;
+        self::$skill->image = self::$skill->image;
         self::$skill->save();
     }
 

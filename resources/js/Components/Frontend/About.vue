@@ -6,7 +6,9 @@
 
 <template>
     <section id="about" class="section bg-slate-100 dark:bg-slate-900 mb-10">
-        <div class="container mx-auto">
+        <div class="container mx-auto" v-motion 
+        :initial="{ opacity: 0, y: 100 }"
+        :visible="{ opacity: 1, y: 0, }">
             <div class="flex flex-col xl:flex-row gap-24" v-for="about in abouts.data" :key="about.id">
                 <img class="object-cover h-full w-[566px] md:mx-auto lg:mx-0 rounded-2xl" :src="about.image" alt="about">
                 <div class="flex flex-col items-center text-center lg:items-start lg:text-left">

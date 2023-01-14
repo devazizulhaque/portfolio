@@ -73,7 +73,7 @@ class AboutController extends Controller
      */
     public function update(Request $request, About $about)
     {
-        About::createAbout($request, $about);
+        About::updateAbout($request, $about);
         return redirect()->route('abouts.index')->with('message', 'About update successfully...');
     }
 

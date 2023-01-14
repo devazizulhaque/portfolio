@@ -64,6 +64,7 @@ class Project extends Model
         self::$project->skill_id = $request->skill_id;
         self::$project->name = $request->name;
         self::$project->project_url = $request->project_url;
+        self::$project->image = self::$project->image;
         self::$project->save();
     }
 

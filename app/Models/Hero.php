@@ -42,15 +42,39 @@ class Hero extends Model
     }
 
 
-    public static function createHero($request, $hero = null)
+    public static function createHero($request)
     {
-        Hero::updateOrCreate(
-            ['id' => $hero],
-            [
-                'title' => $request->title,
-                'description' => $request->description,
-                'image' => self::getImageUrl($request, $hero),
-            ]
-        );
+        $request->validate([
+            'image' => ['required', 'image'],
+            'title' => ['required', 'max:255'],
+            'description' => ['required', 'max:255'],
+        ]);
+
+        self::$hero = new Hero();
+        self::$hero->title = $request->title;
+        self::$hero->description = $request->description;
+        self::$hero->image = self::getImageUrl($request);
+        self::$hero->save();
+    }
+
+    public static function updateHero($request, $hero){
+        self::$hero = Hero::find($hero->id);
+        if($request->file('image')){
+            if (file_exists(self::$hero->image)) {
+                unlink(self::$hero->image);
+            }
+            self::$hero->image = self::getImageUrl($request);
+        }
+        else{
+            self::$hero->image = $hero->image;
+        }
+        $request->validate([
+            'title' => ['required', 'max:255'],
+            'description' => ['required', 'max:255'],
+        ]);
+        self::$hero->title = $request->title;
+        self::$hero->description = $request->description;
+        self::$hero->image = self::$hero->image;
+        self::$hero->save();
     }
 }

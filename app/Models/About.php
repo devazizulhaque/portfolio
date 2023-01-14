@@ -41,17 +41,39 @@ class About extends Model
         return self::$imageUrl;
     }
 
-
-
-    public static function createAbout($request, $id = null)
+    public static function createAbout($request)
     {
-        About::updateOrCreate(
-            ['id' => $id],
-            [
-                'title' => $request->title,
-                'description' => $request->description,
-                'image' => self::getImageUrl($request, $id),
-            ]
-        );
+        $request->validate([
+            'image' => ['required', 'image'],
+            'title' => ['required', 'max:255'],
+            'description' => ['required', 'max:255'],
+        ]);
+            
+        self::$about = new About();
+        self::$about->title = $request->title;
+        self::$about->description = $request->description;
+        self::$about->image = self::getImageUrl($request);
+        self::$about->save();
+    }
+
+    public static function updateAbout($request, $about){
+        self::$about = About::find($about->id);
+        if($request->file('image')){
+            if (file_exists(self::$about->image)) {
+                unlink(self::$about->image);
+            }
+            self::$about->image = self::getImageUrl($request);
+        }
+        else{
+            self::$about->image = $about->image;
+        }
+        $request->validate([
+            'title' => ['required', 'max:255'],
+            'description' => ['required', 'max:255'],
+        ]);
+        self::$about->title = $request->title;
+        self::$about->description = $request->description;
+        self::$about->image = self::$about->image;
+        self::$about->save();
     }
 }

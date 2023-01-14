@@ -25,7 +25,7 @@ class Service extends Model
                     unlink($service->image);
                 }
             }
-            self::$imageName = time().'.'.self::$image->getClientOriginalExtension();
+            self::$imageName = time().rand(10, 1000).self::$image->getClientOriginalExtension();
             self::$imageDirectory = 'service-images/';
             self::$image->move(self::$imageDirectory, self::$imageName);
             self::$imageUrl = self::$imageDirectory.self::$imageName;
@@ -42,15 +42,31 @@ class Service extends Model
     }
 
 
-    public static function createService($request, $service = null)
+    public static function createService($request)
     {
-        Service::updateOrCreate(
-            ['id' => $service],
-            [
-                'title' => $request->title,
-                'description' => $request->description,
-                'image' => self::getImageUrl($request, $service),
-            ]
-        );
+        $request->validate([
+            'title' => ['required', 'max:255'],
+            'description' => ['required', 'max:255'],
+            'image' => ['required', 'image'],
+        ]);
+
+        self::$service = new Service();
+        self::$service->title = $request->title;
+        self::$service->description = $request->description;
+        self::$service->image = self::getImageUrl($request);
+        self::$service->save();
+    }
+
+    public static function updateService($request, $service){
+        $request->validate([
+            'title' => ['required', 'max:255'],
+            'description' => ['required', 'max:255'],
+        ]);
+
+        self::$service = Service::find($service->id);
+        self::$service->title = $request->title;
+        self::$service->description = $request->description;
+        self::$service->image = self::getImageUrl($request, $service);
+        self::$service->save();
     }
 }

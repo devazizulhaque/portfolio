@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HeroController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -23,6 +24,7 @@ use App\Http\Controllers\WelcomeController;
 */
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
+Route::post('/contact', ContactController::class)->name('contact');
 
 Route::middleware(['auth', 'verified'])->group(function(){
     Route::get('/dashboard', function () {

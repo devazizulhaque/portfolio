@@ -8,7 +8,9 @@
 
 <template>
     <section id="portfolio" class="section bg-gray-50 dark:bg-slate-900 min-h-[700px]">
-        <div class="container mx-auto mb-12">
+        <div class="container mx-auto mb-12" v-motion 
+        :initial="{ opacity: 0, y: 100 }"
+        :visible="{ opacity: 1, y: 0, }">
             <div class="flex flex-col items-center text-center">
                 <h2 class="section-title">My latest work</h2>
                 <p class="section-subtitle">Here are some of my latest projects</p>

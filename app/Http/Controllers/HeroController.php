@@ -73,7 +73,7 @@ class HeroController extends Controller
      */
     public function update(Request $request, Hero $hero)
     {
-        Hero::createHero($request, $hero);
+        Hero::updateHero($request, $hero);
         return redirect()->route('heros.index')->with('message', 'Hero update successfully...');
     }
 

@@ -5,16 +5,18 @@
 </script>
 
 <template>
-    <section class="section bg-gray-50 dark:bg-slate-900">
-        <div class="container mx-auto">
+    <section id="services" class="section bg-gray-50 dark:bg-slate-900 mt-20 mb-10">
+        <div class="container mx-auto" v-motion 
+        :initial="{ opacity: 0, y: 100 }"
+        :visible="{ opacity: 1, y: 0, }">
             <div class="flex flex-col items-center text-center">
                 <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">What I do for clients</h2>
-                <p class="mt-4 text-gray-500 dark:text-gray-400">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <p class="mt-4 text-gray-500 dark:text-gray-400">Client-focused, and customer-centric, creating website solutions that deliver tangible business results, I help brands the ever-changing digital landscape.</p>
 
             </div>
 
-            <div class="grid mb-8 border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 md:mb-12 md:grid-cols-2 mt-10" v-for="service in services.data" :key="service.id">
-                <figure class="flex flex-col items-center justify-center p-8 text-center bg-white border-b border-gray-200 rounded-t-lg md:rounded-t-none md:rounded-tl-lg md:border-r dark:bg-gray-800 dark:border-gray-700 m-5">
+            <div class="grid mb-8 border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 md:mb-12 md:grid-cols-2 mt-10">
+                <figure class="flex flex-col items-center justify-center p-8 text-center bg-white border-b border-gray-200 rounded-t-lg md:rounded-t-none md:rounded-tl-lg md:border-r dark:bg-gray-800 dark:border-gray-700 m-5" v-for="service in services.data" :key="service.id">
                     <figcaption class="flex items-center justify-center">
                         <img class="rounded-5 w-100 h-100" :src="service.image" :alt="service.title">
                     </figcaption>  
@@ -24,18 +26,6 @@
                     </blockquote>
                 </figure>
             </div>
-
-
-            <!-- <div class="grid lg:grid-cols-3 gap-8 mt-5" v-for="service in services.data" :key="service.index">
-                <div class="bg-slate-400 dark:bg-slate-900 p-6 rounded-2xl">
-                    <div class="text-orange-400 rounded-sm w-12 h-12 flex justify-center items-center mb-24 text-[28px]">
-                        <img :src="service.image" :alt="service.title">
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-4">{{ service.title }}}</h3>
-                    <p class="text-gray-200 dark:text-gray-400">{{ service.description }}</p>
-
-                </div>
-            </div> -->
         </div>
     </section>
 </template>

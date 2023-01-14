@@ -24,6 +24,7 @@
                         <TextInput id="image" type="file" class="mt-1 block w-full" @input="form.image = $event.target.files[0]" />
                         <InputError class="mt-2" :message="form.errors.image" />
                     </div>
+                    
 
                     <div class="flex items-center justify-end mt-4">
                         <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">Save</PrimaryButton>
@@ -50,4 +51,6 @@
     const submit = () => {
         form.post(route('services.store'));
     };
+
+    
 </script>
