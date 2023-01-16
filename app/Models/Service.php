@@ -45,8 +45,8 @@ class Service extends Model
     public static function createService($request)
     {
         $request->validate([
-            'title' => ['required', 'max:255'],
-            'description' => ['required', 'max:255'],
+            'title' => ['required'],
+            'description' => ['required'],
             'image' => ['required', 'image'],
         ]);
 
@@ -59,8 +59,8 @@ class Service extends Model
 
     public static function updateService($request, $service){
         $request->validate([
-            'title' => ['required', 'max:255'],
-            'description' => ['required', 'max:255'],
+            'title' => ['required'],
+            'description' => ['required'],
         ]);
 
         self::$service = Service::find($service->id);

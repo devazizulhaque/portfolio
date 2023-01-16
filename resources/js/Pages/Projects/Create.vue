@@ -31,8 +31,8 @@
 
                     <div class="mt-4">
                         <InputLabel for="image" value="Image" />
-                        <!-- <input type="file" @input="form.image = $event.target.files[0]" /> -->
-                        <TextInput id="image" type="file" class="mt-1 block w-full" @input="form.image = $event.target.files[0]" />
+                        <img v-if="imagePreview" :src="imagePreview" />
+                        <TextInput id="image" type="file" ref="fileInput" @change="onFileChange" class="mt-1 block w-full" @input="form.image = $event.target.files[0]" />
                         <InputError class="mt-2" :message="form.errors.image" />
                     </div>
 
@@ -64,4 +64,35 @@
     const submit = () => {
         form.post(route('projects.store'));
     };
+</script>
+
+<script>
+export default {
+  data() {
+    return {
+      imagePreview: ''
+    }
+  },
+  methods: {
+    onFileChange(e) {
+      let file = e.target.files[0];
+      let reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = (e) => {
+        this.imagePreview = e.target.result;
+        this.uploadImage(file);
+      }
+    },
+    async uploadImage(file) {
+      let formData = new FormData();
+      formData.append('file', file);
+      try {
+        let response = await axios.post('/upload', formData);
+        console.log(response);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  }
+}
 </script>
