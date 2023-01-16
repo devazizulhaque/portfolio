@@ -19,7 +19,7 @@
                         {{ hero.description }}
                     </p>
                     <button class="btn btn-md bg-orange-400 hover:bg-slate-300 md:btn-lg transition-all">
-                        <span class="text-slate-100 dark:text-white hover:text-black">Get In Touch</span>
+                        <a href="https://github.com/devazizulhaque"><span class="text-slate-100 dark:text-white hover:text-black">Get In Touch</span></a>
                     </button>
                     <div class="pt-12">
                         <h5 class="text-lg flex justify-center lg:justify-start items-center text-black dark:text-white">
